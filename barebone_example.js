@@ -1,22 +1,22 @@
 if (Meteor.isClient) {
-   Session.setDefault("numClicks", 0)
 
-var calculateNumClicks= function () {
-    return Session.get("numClicks");
-  }
+Template.inputFromUser.events({
+  'submit .new-comment'(event) {
+    // Prevent default browser form submit
+    event.preventDefault();
 
+    // Get value from form element
+    const target = event.target;
+    const text = target.text.value;
 
-  Template.main.helpers({
-  numClicks: calculateNumClicks
+    // Insert a task into the collection
+    commentsAboutBernie.insert({
+      text,
+      createdAt: new Date(), // current time
+    });
 
-  });
-
- Template.main.events ({
-   'click button': function () {
-
-     Session.set("numClicks", Session.get("numClicks")+1);
-   }
-
- });
-
+    // Clear form
+    target.text.value = '';
+  },
+});
 }
