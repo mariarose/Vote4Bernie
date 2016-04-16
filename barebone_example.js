@@ -58,6 +58,15 @@ if (Meteor.isClient) {
     },
   });
 
+  var commentOurputHelperDictionary = {
+    first:
+    function () {
+     return "yo" + "how are you";},
+    last:"dude"
+    };
+
+  Template.inputFromOthers.helpers(commentOutputHelperDictionary);
+
 
   if (Meteor.isServer) {
   Meteor.startup(function () {
